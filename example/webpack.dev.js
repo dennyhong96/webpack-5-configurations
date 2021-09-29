@@ -1,10 +1,7 @@
 const { HotModuleReplacementPlugin } = require("webpack");
-const { merge } = require("webpack-merge");
 const MiniCSSExtractPlugin = require("mini-css-extract-plugin");
 
-const commonConfig = require("./webpack.common");
-
-const devConfig = {
+module.exports = {
   mode: "development",
 
   devtool: "eval-cheap-module-source-map",
@@ -44,5 +41,3 @@ const devConfig = {
     }),
   ],
 };
-
-module.exports = merge(commonConfig, devConfig);

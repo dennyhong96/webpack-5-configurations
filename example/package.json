@@ -8,10 +8,10 @@
     "*.css"
   ],
   "scripts": {
-    "build": "webpack --config ./webpack.prod.js",
-    "build:stats": "webpack --config ./webpack.prod.js --profile --json > _bundle_stats.json",
-    "build:dev": "webpack --config ./webpack.dev.js",
-    "dev": "webpack serve --config ./webpack.dev.js"
+    "build": "webpack --env production --config ./webpack.common.js",
+    "build:stats": "webpack --env production --config ./webpack.common.js --profile --json > _bundle_stats.json",
+    "build:dev": "webpack --config ./webpack.common.js",
+    "dev": "webpack serve --config ./webpack.common.js"
   },
   "keywords": [],
   "author": "",
@@ -24,6 +24,7 @@
     "babel-loader": "^8.2.2",
     "css-loader": "^6.3.0",
     "html-webpack-plugin": "^5.3.2",
+    "imports-loader": "^3.0.0",
     "mini-css-extract-plugin": "^2.3.0",
     "node-sass": "^6.0.1",
     "postcss": "^8.3.8",

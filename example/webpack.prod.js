@@ -1,9 +1,6 @@
-const { merge } = require("webpack-merge");
 const MiniCSSExtractPlugin = require("mini-css-extract-plugin");
 
-const commonConfig = require("./webpack.common");
-
-const prodConfig = {
+module.exports = {
   mode: "production",
 
   output: {
@@ -34,5 +31,3 @@ const prodConfig = {
     }),
   ],
 };
-
-module.exports = merge(commonConfig, prodConfig);
