@@ -3,6 +3,7 @@ const path = require("path");
 const { merge } = require("webpack-merge");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCSSExtractPlugin = require("mini-css-extract-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const ESLintPlugin = require("eslint-webpack-plugin");
 
 const devConfig = require("./webpack.dev.js");
@@ -91,9 +92,18 @@ module.exports = (env) => {
       // Tree shaking - to opt out of tree shaking for certain files, use the "sideEffects" key in package.json
       usedExports: true,
 
+      // Don't show performance problems
+      // performance: false,
+
+      // Separate runtime code into it's own chunk
       runtimeChunk: {
         name: "runtime",
       },
+
+      minimizer: [
+        `...`, // extend existing minimizers (i.e. `terser-webpack-plugin`)
+        new CssMinimizerPlugin(),
+      ],
     },
 
     resolve: {
