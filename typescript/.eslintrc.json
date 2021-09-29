@@ -18,5 +18,10 @@
   },
   "plugins": ["react", "@typescript-eslint"],
   "rules": {},
-  "globals": {}
+  "globals": {},
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  }
 }
