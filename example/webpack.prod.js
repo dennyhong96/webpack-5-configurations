@@ -1,34 +1,42 @@
 const { merge } = require("webpack-merge");
+const MiniCSSExtractPlugin = require("mini-css-extract-plugin");
 
 const commonConfig = require("./webpack.common");
 
 const prodConfig = {
   mode: "production",
 
+  output: {
+    filename: "[name].[contenthash].bundle.js",
+    chunkFilename: "[name].[contenthash].chunk.js",
+  },
+
   devtool: "source-map", // or "cheap-module-source-map"
 
   optimization: {
+    // Tree shaking is automatically enabled for prod
+    // Tree shaking - to opt out of tree shaking for certain files, use the "sideEffects" key in package.json
+    usedExports: true,
+
+    // Code splitting
     splitChunks: {
-      chunks: "all", // Split static and async dynamic imports
-      // minSize: 20000, // Split modules that are larger than 20000bytes
-      // minChunks: 1,
-      // enforceSizeThreshold: 50000,
-      // // Above props specifify quanlifications for chunk splitting, cacheGroups specifies how to split chunks
-      // cacheGroups: {
-      //   defaultVendors: {
-      //     test: /[\\/]node_modules[\\/]/, // group vendor modules chunks into one file
-      //     priority: -10,
-      //     reuseExistingChunk: true,
-      //     filename: "vendors.js",
-      //   },
-      //   default: {
-      //     minChunks: 1,
-      //     priority: -20,
-      //     reuseExistingChunk: true,
-      //   },
-      // },
+      chunks: "all", // Split both static and async dynamic imports
+      cacheGroups: {
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10,
+          filename: "vendors.[contenthash].js",
+        },
+      },
     },
   },
+
+  plugins: [
+    new MiniCSSExtractPlugin({
+      filename: "[name].[contenthash].css",
+      chunkFilename: "[name].[contenthash].chunk.css",
+    }),
+  ],
 };
 
 module.exports = merge(commonConfig, prodConfig);

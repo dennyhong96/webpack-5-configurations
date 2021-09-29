@@ -1,28 +1,23 @@
-// import _ from "lodash";
-// import $ from "jquery";
+import _ from "lodash";
+import $ from "jquery";
 
-// const $root = document.querySelector("#root");
-// // const $el = document.createElement("div");
-// // $el.innerHTML = _.join(["a", "b", "c"], "-");
-// // $root.append($el);
+import "./styles/index.scss";
+import styles from "./styles/modules/index.module.scss";
 
-// async function getComponent() {
-//   // Dynamic imports (Lazy load) triggers code split
-//   const { default: _ } = await import("lodash");
-//   const el = document.createElement("div");
-//   el.innerHTML = _.join(["a", "b", "c"], "-");
-//   return el;
-// }
+const $el = $("div");
+$el.html(_.join(["Denny", "Hong"], " "));
+$("#root").append($el);
 
-// console.log("click");
-// getComponent().then((el) => $root.append(el));
-
-document.addEventListener("click", async function () {
-  const { default: handleClick } = await import(
-    /* webpackPreload: true */ "./click"
-  );
-  handleClick();
-});
+// const $button = document.createElement("button");
+// $button.innerHTML = "Press Me";
+// $button.classList.add(styles.button);
+// $button.addEventListener("click", async function () {
+//   const { default: handleClick } = await import(
+//     /* webpackPreload: true */ /* webpackChunkName: "click" */ "./click"
+//   );
+//   handleClick();
+// });
+// document.querySelector("#root").append($button);
 
 // To enable HMR
 // if (module.hot) {

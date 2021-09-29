@@ -1,5 +1,6 @@
 const path = require("path");
 
+const MiniCSSExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
@@ -8,7 +9,6 @@ module.exports = {
   },
 
   output: {
-    filename: "[name].bundle.js",
     path: path.resolve(__dirname, "dist"),
     clean: true,
     // assetModuleFilename: "assets/[name]_[hash][ext][query]",
@@ -51,7 +51,7 @@ module.exports = {
       {
         test: /\.modules\.(css|s[ac]ss)$/i,
         use: [
-          "style-loader",
+          MiniCSSExtractPlugin.loader,
           {
             loader: "css-loader",
             options: { importLoaders: 2, modules: true },
@@ -65,7 +65,7 @@ module.exports = {
       {
         test: /\.(css|s[ac]ss)$/i,
         use: [
-          "style-loader",
+          MiniCSSExtractPlugin.loader,
           { loader: "css-loader", options: { importLoaders: 2 } },
           "sass-loader",
           "postcss-loader",
