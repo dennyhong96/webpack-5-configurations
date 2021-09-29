@@ -118,3 +118,5 @@ dist
 .pnp.*
 
 _bundle_stats.json
+
+.DS_Store
