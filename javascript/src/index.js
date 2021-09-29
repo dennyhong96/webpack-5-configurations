@@ -1,12 +1,14 @@
-import _ from "lodash";
-import $ from "jquery";
+import React from "react";
+import ReactDOM from "react-dom";
 
+import styles from "./index.module.scss";
 import "./styles/index.scss";
-import styles from "./styles/modules/index.module.scss";
 
-const $el = $("div");
-$el.html(_.join(["Denny", "Hong"], " "));
-$("#root").append($el);
+const App = ({ children }) => {
+  return <h1 className={styles.heading}>{children}</h1>;
+};
+
+ReactDOM.render(<App>Hello, App!</App>, document.querySelector("#root"));
 
 // const $button = document.createElement("button");
 // $button.innerHTML = "Press Me";
