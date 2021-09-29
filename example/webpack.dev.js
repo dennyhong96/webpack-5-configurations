@@ -22,10 +22,6 @@ const devConfig = {
   },
 
   optimization: {
-    // Tree shaking is automatically enabled for prod
-    // Tree shaking - to opt out of tree shaking for certain files, use the "sideEffects" key in package.json
-    usedExports: true,
-
     // Code splitting
     splitChunks: {
       chunks: "all", // Split both static and async dynamic imports

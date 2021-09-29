@@ -74,6 +74,16 @@ module.exports = {
     ],
   },
 
+  optimization: {
+    // Tree shaking is automatically enabled for prod
+    // Tree shaking - to opt out of tree shaking for certain files, use the "sideEffects" key in package.json
+    usedExports: true,
+
+    runtimeChunk: {
+      name: "runtime",
+    },
+  },
+
   resolve: {
     extensions: [".js", ".ts", ".jsx", ".tsx"],
   },
