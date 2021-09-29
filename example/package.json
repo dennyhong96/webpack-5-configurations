@@ -9,6 +9,7 @@
   ],
   "scripts": {
     "build": "webpack --config ./webpack.prod.js",
+    "build:stats": "webpack --config ./webpack.prod.js --profile --json > _bundle_stats.json",
     "build:dev": "webpack --config ./webpack.dev.js",
     "dev": "webpack serve --config ./webpack.dev.js"
   },
@@ -31,12 +32,15 @@
     "sass-loader": "^12.1.0",
     "style-loader": "^3.3.0",
     "webpack": "^5.55.0",
+    "webpack-bundle-analyzer": "^4.4.2",
     "webpack-cli": "^4.8.0",
     "webpack-dev-server": "^4.3.0",
     "webpack-merge": "^5.8.0"
   },
   "dependencies": {
     "core-js": "^3.18.1",
+    "jquery": "^3.6.0",
+    "lodash": "^4.17.21",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },

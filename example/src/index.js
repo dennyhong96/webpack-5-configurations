@@ -1,8 +1,28 @@
-import { add } from "./math";
+// import _ from "lodash";
+// import $ from "jquery";
 
-import "./styles/index.scss";
+// const $root = document.querySelector("#root");
+// // const $el = document.createElement("div");
+// // $el.innerHTML = _.join(["a", "b", "c"], "-");
+// // $root.append($el);
 
-console.log(add(4, 5));
+// async function getComponent() {
+//   // Dynamic imports (Lazy load) triggers code split
+//   const { default: _ } = await import("lodash");
+//   const el = document.createElement("div");
+//   el.innerHTML = _.join(["a", "b", "c"], "-");
+//   return el;
+// }
+
+// console.log("click");
+// getComponent().then((el) => $root.append(el));
+
+document.addEventListener("click", async function () {
+  const { default: handleClick } = await import(
+    /* webpackPreload: true */ "./click"
+  );
+  handleClick();
+});
 
 // To enable HMR
 // if (module.hot) {
