@@ -4,3 +4,7 @@
   height: auto;
   transform: translate(25px, 25px);
 }
+
+.item:nth-of-type(2n) {
+  background-color: #ddd;
+}

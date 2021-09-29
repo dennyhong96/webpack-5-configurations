@@ -1,14 +1,8 @@
 const path = require("path");
 
-const { HotModuleReplacementPlugin } = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-const mode =
-  process.env.NODE_ENV === "production" ? "production" : "development";
-
 module.exports = {
-  mode,
-
   entry: {
     main: "./src/index.js",
   },
@@ -20,20 +14,6 @@ module.exports = {
     // assetModuleFilename: "assets/[name]_[hash][ext][query]",
     // publicPath: "https://cdn.example.com/",
   },
-
-  devtool:
-    mode === "production"
-      ? "source-map" // or "cheap-module-source-map"
-      : "eval-cheap-module-source-map",
-
-  ...(mode === "development" && {
-    devServer: {
-      static: "./dist",
-      open: true,
-      hot: true,
-      port: 3000,
-    },
-  }),
 
   module: {
     rules: [
@@ -98,20 +78,9 @@ module.exports = {
     extensions: [".js", ".ts", ".jsx", ".tsx"],
   },
 
-  ...(mode === "development" && {
-    optimization: {
-      // Tree shaking - to opt out of tree shaking for certain files,
-      // use the "sideEffects" key in package.json
-      // Tree shaking is automatically enabled for prod
-      usedExports: true,
-    },
-  }),
-
   plugins: [
     new HtmlWebpackPlugin({
       template: "./src/index.html",
     }),
-
-    ...(mode === "development" ? [new HotModuleReplacementPlugin()] : []),
   ],
 };
