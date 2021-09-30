@@ -1,5 +1,5 @@
 {
-  "name": "typescript-example",
+  "name": "webpack5-mpa-ts-example",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -14,8 +14,8 @@
     "dev": "webpack serve --config ./webpack.common.js"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Denny Hong",
+  "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.15.5",
     "@babel/preset-env": "^7.15.6",
