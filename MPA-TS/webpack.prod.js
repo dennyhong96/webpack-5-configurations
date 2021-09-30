@@ -14,15 +14,13 @@ module.exports = {
     // Code splitting
     splitChunks: {
       chunks: "all", // Split both static and async dynamic imports
-
-      // Vendors cache group is not working because of dll
-      // cacheGroups: {
-      //   vendors: {
-      //     test: /[\\/]node_modules[\\/]/,
-      //     priority: -10,
-      //     filename: "vendors.[contenthash].js",
-      //   },
-      // },
+      cacheGroups: {
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10,
+          filename: "vendors.[contenthash].js",
+        },
+      },
     },
   },
 
