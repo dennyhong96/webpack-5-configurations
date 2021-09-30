@@ -33,7 +33,8 @@ module.exports = (env) => {
         // TS & Babel
         {
           test: /\.[tj]sx?$/i,
-          exclude: /(node_modules|bower_components)/i,
+          // exclude: /(node_modules|bower_components)/i,
+          include: path.resolve(__dirname, "src"),
           use: [{ loader: "babel-loader" }, { loader: "ts-loader" }],
         },
 
@@ -107,7 +108,10 @@ module.exports = (env) => {
     },
 
     resolve: {
-      extensions: [".js", ".ts", ".jsx", ".tsx"],
+      extensions: [".js", ".ts", ".jsx", ".tsx"], // omit extensions when importting files
+      alias: {
+        "@": path.resolve(__dirname, "src"),
+      },
     },
 
     plugins: [
