@@ -1,13 +1,43 @@
 const path = require("path");
-// const { ProvidePlugin } = require("webpack");
+const fs = require("fs");
+const { ProvidePlugin, DllReferencePlugin } = require("webpack");
 const { merge } = require("webpack-merge");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const AddAssetHtmlPlugin = require("add-asset-html-webpack-plugin");
 const MiniCSSExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const ESLintPlugin = require("eslint-webpack-plugin");
 
 const devConfig = require("./webpack.dev.js");
 const prodConfig = require("./webpack.prod.js");
+
+let dllFiles;
+try {
+  dllFiles = fs.readdirSync(path.resolve(__dirname, "dll"));
+  if (!dllFiles.length) throw new Error();
+} catch (error) {
+  console.error(
+    'ERROR: Please run "build:dll" script first to build and link dependent libraries.',
+  );
+  process.exit(1);
+}
+const dllPlugins = [];
+dllFiles.forEach((file) => {
+  if (/\.dll\.js$/i.test(file)) {
+    dllPlugins.push(
+      new AddAssetHtmlPlugin({
+        filepath: path.resolve(__dirname, "dll", file),
+        publicPath: "",
+      }),
+    );
+  } else if (/\.manifest\.json$/i.test(file)) {
+    dllPlugins.push(
+      new DllReferencePlugin({
+        manifest: path.resolve(__dirname, "dll", file),
+      }),
+    );
+  }
+});
 
 module.exports = (env) => {
   let environmentConfig = devConfig;
@@ -18,7 +48,7 @@ module.exports = (env) => {
 
   return merge(environmentConfig, {
     entry: {
-      main: "./src/index.js",
+      main: "./src/index.tsx",
     },
 
     output: {
@@ -30,12 +60,12 @@ module.exports = (env) => {
 
     module: {
       rules: [
-        // Babel
+        // TS & Babel
         {
-          test: /\.jsx?$/i,
+          test: /\.[tj]sx?$/i,
           // exclude: /(node_modules|bower_components)/i,
           include: path.resolve(__dirname, "src"),
-          use: [{ loader: "babel-loader" }],
+          use: [{ loader: "babel-loader" }, { loader: "ts-loader" }],
         },
 
         // Image files
@@ -108,7 +138,7 @@ module.exports = (env) => {
     },
 
     resolve: {
-      extensions: [".js", ".jsx"], // omit extensions when importting files
+      extensions: [".js", ".ts", ".jsx", ".tsx"], // omit extensions when importting files
       alias: {
         "@": path.resolve(__dirname, "src"),
       },
@@ -118,6 +148,8 @@ module.exports = (env) => {
       new HtmlWebpackPlugin({
         template: "./src/index.html",
       }),
+
+      ...dllPlugins,
 
       new ESLintPlugin(),
 
