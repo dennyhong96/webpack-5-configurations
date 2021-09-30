@@ -1,0 +1,81 @@
+{
+  "items": [
+    {
+      "_id": {
+        "$num": "5968dd23fc13ae04d9000001"
+      },
+      "nombre_prod": "sildenafil citrate",
+      "nombre": "Wisozk",
+      "productor": "Wisozk Inc",
+      "stock": 261,
+      "precio": "€10.47",
+      "tamanos": ["grande", "mediano", "pequeño"],
+      "imagen": "https://loremflickr.com/120/120"
+    },
+    {
+      "_id": {
+        "$num": "5968dd23fc13ae04d9000002"
+      },
+      "nombre_prod": "Mountain Juniperus ashei",
+      "nombre": "Juan Andrés",
+      "productor": "Keebler-Hilpert",
+      "stock": 292,
+      "precio": "€8.74",
+      "tamanos": ["grande", "pequeño"],
+      "contacto": {
+        "nombre": "Juan Andrés",
+        "apellido": "Nuñez",
+        "tel": "878 32 88 96"
+      }
+    },
+    {
+      "_id": {
+        "$num": "5968dd23fc13ae04d9000002"
+      },
+      "nombre_prod": "Mountain Juniperus ashei",
+      "nombre": "Juan",
+      "productor": "Keebler-Hilpert",
+      "stock": 292,
+      "precio": "€8.74",
+      "tamanos": ["grande", "pequeño"],
+      "contacto": {
+        "nombre": "Juan Andrés",
+        "apellido": "Nuñez",
+        "tel": "878 32 88 96"
+      }
+    },
+    {
+      "_id": {
+        "$num": "5968dd23fc13ae04d9000002"
+      },
+      "nombre_prod": "Mountain Juniperus ashei",
+      "nombre": "Nuñez",
+      "productor": "Keebler-Hilpert",
+      "stock": 292,
+      "precio": "€8.74",
+      "tamanos": ["grande", "pequeño"],
+      "contacto": {
+        "nombre": "Juan Andrés",
+        "apellido": "Nuñez",
+        "tel": "878 32 88 96"
+      }
+    },
+    {
+      "_id": {
+        "$num": "5968dd23fc13ae04d9000003"
+      },
+      "nombre_prod": "Dextromathorphan HBr",
+      "nombre": "Andrew",
+      "productor": "Schmitt-Weissnat",
+      "stock": 211,
+      "precio": "€20.53",
+      "tamanos": ["mediano", "pequeño"],
+      "imagen": "https://loremflickr.com/120/120",
+      "contacto": {
+        "nombre": "Andrew",
+        "apellido": "Steward",
+        "tel": "989 00 87 86"
+      }
+    }
+  ]
+}
