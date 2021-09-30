@@ -1,4 +1,5 @@
 const MiniCSSExtractPlugin = require("mini-css-extract-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const WorkboxPlugin = require("workbox-webpack-plugin");
 
 module.exports = {
@@ -10,6 +11,35 @@ module.exports = {
   },
 
   devtool: "source-map", // or "cheap-module-source-map"
+
+  module: {
+    rules: [
+      // CSS Modules -> <name>.module.scss
+      {
+        test: /\.modules\.(css|s[ac]ss)$/i,
+        use: [
+          MiniCSSExtractPlugin.loader,
+          {
+            loader: "css-loader",
+            options: { importLoaders: 2, modules: true },
+          },
+          "sass-loader",
+          "postcss-loader",
+        ],
+      },
+
+      // Global CSS -> <name>.scss
+      {
+        test: /\.(css|s[ac]ss)$/i,
+        use: [
+          MiniCSSExtractPlugin.loader,
+          { loader: "css-loader", options: { importLoaders: 2 } },
+          "sass-loader",
+          "postcss-loader",
+        ],
+      },
+    ],
+  },
 
   optimization: {
     // Code splitting
@@ -23,6 +53,11 @@ module.exports = {
         },
       },
     },
+
+    minimizer: [
+      `...`, // extend existing minimizers (i.e. `terser-webpack-plugin`)
+      new CssMinimizerPlugin(),
+    ],
   },
 
   plugins: [

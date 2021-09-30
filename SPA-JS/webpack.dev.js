@@ -1,5 +1,4 @@
 const { HotModuleReplacementPlugin } = require("webpack");
-const MiniCSSExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   mode: "development",
@@ -9,6 +8,35 @@ module.exports = {
   output: {
     filename: "[name].bundle.js",
     chunkFilename: "[name].chunk.js",
+  },
+
+  module: {
+    rules: [
+      // CSS Modules -> <name>.module.scss
+      {
+        test: /\.modules\.(css|s[ac]ss)$/i,
+        use: [
+          "style-loader",
+          {
+            loader: "css-loader",
+            options: { importLoaders: 2, modules: true },
+          },
+          "sass-loader",
+          "postcss-loader",
+        ],
+      },
+
+      // Global CSS -> <name>.scss
+      {
+        test: /\.(css|s[ac]ss)$/i,
+        use: [
+          "style-loader",
+          { loader: "css-loader", options: { importLoaders: 2 } },
+          "sass-loader",
+          "postcss-loader",
+        ],
+      },
+    ],
   },
 
   devServer: {
@@ -32,12 +60,5 @@ module.exports = {
     },
   },
 
-  plugins: [
-    new HotModuleReplacementPlugin(),
-
-    new MiniCSSExtractPlugin({
-      filename: "[name].css",
-      chunkFilename: "[name].chunk.css",
-    }),
-  ],
+  plugins: [new HotModuleReplacementPlugin()],
 };

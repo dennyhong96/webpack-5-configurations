@@ -3,8 +3,6 @@ const path = require("path");
 const fs = require("fs");
 const { merge } = require("webpack-merge");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const MiniCSSExtractPlugin = require("mini-css-extract-plugin");
-const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const ESLintPlugin = require("eslint-webpack-plugin");
 
 const devConfig = require("./webpack.dev.js");
@@ -86,31 +84,6 @@ module.exports = (env) => {
             filename: "assets/fonts/[name]_[hash][ext][query]",
           },
         },
-
-        // CSS Modules -> <name>.module.scss
-        {
-          test: /\.modules\.(css|s[ac]ss)$/i,
-          use: [
-            MiniCSSExtractPlugin.loader,
-            {
-              loader: "css-loader",
-              options: { importLoaders: 2, modules: true },
-            },
-            "sass-loader",
-            "postcss-loader",
-          ],
-        },
-
-        // Global CSS -> <name>.scss
-        {
-          test: /\.(css|s[ac]ss)$/i,
-          use: [
-            MiniCSSExtractPlugin.loader,
-            { loader: "css-loader", options: { importLoaders: 2 } },
-            "sass-loader",
-            "postcss-loader",
-          ],
-        },
       ],
     },
 
@@ -126,11 +99,6 @@ module.exports = (env) => {
       runtimeChunk: {
         name: "runtime",
       },
-
-      minimizer: [
-        `...`, // extend existing minimizers (i.e. `terser-webpack-plugin`)
-        new CssMinimizerPlugin(),
-      ],
     },
 
     resolve: {
